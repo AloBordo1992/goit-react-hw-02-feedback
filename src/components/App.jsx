@@ -10,11 +10,9 @@ export class App extends Component {
     neutral: 0,
     bad: 0,
   };
-  updateState = e => {
-    this.setState(prevState => {
-      console.log('prevState :>>', prevState);
-      return { good: prevState.good + 1 };
-    });
+
+  updateState = feedback => {
+    this.setState(prevState => ({ [feedback]: prevState[feedback] + 1 }));
   };
 
   countTotalFeedback() {
@@ -29,12 +27,15 @@ export class App extends Component {
     return (
       <div>
         <Section title="Please leave feedback">
-          <Feedbackoption updateState={this.updateState} />
+          <Feedbackoption
+            options={Object.keys(this.state)}
+            updateState={this.updateState}
+          />
         </Section>
         <Section title="Statistics">
           {this.countTotalFeedback() !== 0 ? (
             <Statistics
-              good={this.setState.good}
+              good={this.state.good}
               neutral={this.state.neutral}
               bad={this.state.bad}
               totalFeedback={this.countTotalFeedback()}

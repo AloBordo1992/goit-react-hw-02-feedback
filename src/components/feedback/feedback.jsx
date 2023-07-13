@@ -1,22 +1,16 @@
-export const Feedbackoption = updateState => {
+export const Feedbackoption = ({ options, updateState }) => {
   return (
     <>
       <ul>
-        <li>
-          <button type="button" onClick={() => updateState}>
-            good
-          </button>
-        </li>
-        <li>
-          <button type="button" onClick={() => updateState}>
-            neutral
-          </button>
-        </li>
-        <li>
-          <button type="button" onClick={() => updateState}>
-            bad
-          </button>
-        </li>
+        {options.map(option => {
+          return (
+            <li key={option}>
+              <button type="button" onClick={() => updateState(option)}>
+                {option}
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </>
   );
